@@ -1,4 +1,4 @@
-name: KNPS 생태탐방원 잔여 알림
+name: KNPS 탐방 체크
 
 on:
   schedule:
