@@ -1,0 +1,38 @@
+name: KNPS 야영장 잔여 알림
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 코드 가져오기
+        uses: actions/checkout@v4
+
+      - name: 파이썬 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 필요한 라이브러리 설치
+        run: pip install requests beautifulsoup4 holidays
+
+      - name: 야영장 잔여 확인 스크립트 실행
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python camp_watcher.py
+
+      - name: camp_state.json 변경사항 커밋
+        run: |
+          git config user.name "knps-watcher-bot"
+          git config user.email "actions@github.com"
+          git add camp_state.json
+          git diff --cached --quiet || git commit -m "update camp state"
+          git push
