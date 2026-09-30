@@ -1,4 +1,4 @@
-name: KNPS 야영장 잔여 알림
+name: KNPS 야영장 잔여 알림 v2
 
 on:
   schedule:
