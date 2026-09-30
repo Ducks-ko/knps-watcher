@@ -2,11 +2,9 @@ name: KNPS 탐방 체크
 
 on:
   schedule:
-    # 10분마다 실행 (UTC 기준이라 한국시간과 다르지만 신경 안 써도 됩니다)
     - cron: "*/10 * * * *"
-  workflow_dispatch: {}   # "Run workflow" 버튼으로 수동 실행도 가능하게 함
+  workflow_dispatch: {}
 
-# state.json 파일을 다시 저장소에 커밋할 수 있도록 쓰기 권한 부여
 permissions:
   contents: write
 
@@ -37,4 +35,8 @@ jobs:
           git config user.email "actions@github.com"
           git add state.json
           git diff --cached --quiet || git commit -m "update state"
-          git push
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push && break
+            echo "충돌 발생, 재시도 ($i)..."
+            sleep $((RANDOM % 10 + 1))
+          done
