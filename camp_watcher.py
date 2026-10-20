@@ -36,6 +36,8 @@ CAMPSITES = [
     {"dept_id": "B071001", "dept_name": "상의", "parent_dept_name": "주왕산", "prd_ctg_id": "02032,02021"},
     {"dept_id": "B101001", "dept_name": "구룡", "parent_dept_name": "치악산", "prd_ctg_id": "02032,02021"},
     {"dept_id": "B221004", "dept_name": "소도", "parent_dept_name": "태백산", "prd_ctg_id": "02032"},
+    {"dept_id": "B042001", "dept_name": "내장", "parent_dept_name": "내장산", "prd_ctg_id": "02021"},
+    {"dept_id": "B042004", "dept_name": "내장호", "parent_dept_name": "내장산", "prd_ctg_id": "02032"},
 ]
 
 URL = "https://reservation.knps.or.kr/reservation/campsiteList.do"
